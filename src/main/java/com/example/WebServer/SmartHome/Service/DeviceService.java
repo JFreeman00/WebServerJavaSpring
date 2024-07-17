@@ -1,12 +1,12 @@
 package com.example.WebServer.SmartHome.Service;
 
-import com.example.WebServer.SmartHome.Controller.DeviceController;
-import com.example.WebServer.SmartHome.DeviceCommand;
+import com.example.WebServer.SmartHome.Entity.DeviceEntity;
 import com.example.WebServer.SmartHome.Entity.StatusResponse;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import com.google.gson.JsonObject;
 
 @Service
 public class DeviceService {
@@ -15,17 +15,10 @@ public class DeviceService {
     // We use 1337 that's why we need to specify the port number in the URL
     // http://192.168.0.97 for ESP
     private final String ESP_URL = "http://192.168.0.97:1337";
-    //private final DeviceController deviceController;
 
-    /*public DeviceService(DeviceController deviceController) {
-        this.deviceController = deviceController;
-    }
+    public ResponseEntity<Object> sendMessageToDevice(DeviceEntity deviceEntity) {
 
-     */
-
-    public ResponseEntity<Object> sendMessageToDevice(DeviceCommand deviceCommand) {
-
-        ResponseEntity<Object> responseCheckMessage = checkMessage(deviceCommand);
+        ResponseEntity<Object> responseCheckMessage = checkDeviceCommand(deviceEntity);
 
         if(responseCheckMessage.getStatusCode() == HttpStatus.OK) {
             RestTemplate restTemplate = new RestTemplate();
@@ -34,7 +27,12 @@ public class DeviceService {
             headers.setContentType(MediaType.APPLICATION_JSON);
 
             // Det vi ska skicka (Payload) så här måste vi skicka en string
-            String jsonBody = "{\"command\": \"" + deviceCommand.getCommand() + "\"}";
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("command", deviceEntity.getCommand());
+            jsonObject.addProperty("device", deviceEntity.getDevice());
+
+            String jsonBody = jsonObject.toString();
+            System.out.println(jsonBody);
 
             HttpEntity<String> requestEntity = new HttpEntity<>(jsonBody, headers);
 
@@ -55,7 +53,7 @@ public class DeviceService {
         return responseCheckMessage;
     }
 
-    public ResponseEntity<Object> checkMessage(DeviceCommand deviceCommand) {
+    public ResponseEntity<Object> checkDeviceCommand(DeviceEntity deviceCommand) {
 
         // Kommer nog aldrig att vara denna
         if(deviceCommand.getCommand() == null || deviceCommand.getCommand().isEmpty()) {

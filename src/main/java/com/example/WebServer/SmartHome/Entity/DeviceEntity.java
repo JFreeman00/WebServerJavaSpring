@@ -1,25 +1,25 @@
-package com.example.WebServer.SmartHome;
+package com.example.WebServer.SmartHome.Entity;
 
 /**
  * Class that has the Structure of the JSON
  * Class can take a command and maybe what device
  */
-public class DeviceCommand {
+public class DeviceEntity {
 
     private String command;
     private String device;
 
-    public DeviceCommand() {
+    public DeviceEntity() {
 
     }
 
-    public DeviceCommand(String command) {
+    public DeviceEntity(String command) {
         this.command = command;
     }
 
     //Getters and setters
     public String getCommand() {
-        return command; // This returns
+        return command;
     }
 
     public void setCommand(String command) {
