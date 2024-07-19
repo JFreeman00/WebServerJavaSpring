@@ -1,5 +1,8 @@
 package com.example.WebServer.SmartHome.Entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class that has the Structure of the JSON
  * Class can take a command and maybe what device
@@ -8,13 +11,10 @@ public class DeviceEntity {
 
     private String command;
     private String device;
+    private String ip;
 
     public DeviceEntity() {
 
-    }
-
-    public DeviceEntity(String command) {
-        this.command = command;
     }
 
     //Getters and setters
@@ -33,4 +33,13 @@ public class DeviceEntity {
     public void setDevice(String device) {
         this.device = device;
     }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
 }

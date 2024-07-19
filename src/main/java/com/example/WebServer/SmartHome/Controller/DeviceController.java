@@ -6,13 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 @RestController
-@RequestMapping("/light")
+@RequestMapping("/device")
 public class DeviceController {
 
     @Autowired
     private DeviceService deviceService;
 
+    // Vi sparar command, device och ip
+    List<DeviceEntity> devices = new ArrayList<>(); // Lista för att samla all enheter i
 
     @PostMapping("/send_data")
     public ResponseEntity<Object> receiveMessage(@RequestBody DeviceEntity deviceEntity) {
@@ -24,12 +30,25 @@ public class DeviceController {
 
     }
 
-    // skapa en PostMapping för att bara ta imot DeviceName
+    // Kommer från esp då den startas
+    @PostMapping("/availableDevice")
+    public ResponseEntity<String> registerDevice (@RequestBody DeviceEntity deviceEntity) {
 
+        System.out.println(deviceEntity.getDevice());
+        System.out.println(deviceEntity.getIp());
+        devices.add(deviceEntity);
+        return ResponseEntity.ok("Device registered successfully");
+    }
+
+    // Retunerar alla enheter
+    @GetMapping("/get_local_device")
+    public List<DeviceEntity> getDevice() {
+        return devices;
+    }
 
     // Här ska vi retunera information
     @GetMapping("/get_data")
-    public void getMessage(){
-
+    public List<Object> getMessage(){
+        return List.of("No data found");
     }
 }
