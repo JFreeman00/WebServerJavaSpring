@@ -46,7 +46,7 @@ public class DeviceController {
         return devices;
     }
 
-    // Här ska vi retunera information
+    // Här ska vi retunera information från databasen
     @GetMapping("/get_data")
     public List<Object> getMessage(){
         return List.of("No data found");
