@@ -2,10 +2,13 @@ package com.example.WebServer.SmartHome.Controller;
 
 import com.example.WebServer.SmartHome.Entity.DeviceEntity;
 import com.example.WebServer.SmartHome.Service.DeviceService;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +20,13 @@ public class DeviceController {
     @Autowired
     private DeviceService deviceService;
 
+    @Autowired
+    private MqttClient mqttClient;
+
     // Vi sparar command, device och ip
     List<DeviceEntity> devices = new ArrayList<>(); // Lista för att samla all enheter i
 
+    // ska ändra till MQTT protocol  instället. I denna ska vi kalla på controlDevice
     @PostMapping("/send_data")
     public ResponseEntity<Object> receiveMessage(@RequestBody DeviceEntity deviceEntity) {
 
@@ -51,4 +58,21 @@ public class DeviceController {
     public List<Object> getMessage(){
         return List.of("No data found");
     }
+
+    @GetMapping("/{device}/{state}")
+    public String controlDevice(@PathVariable String device, @PathVariable String state){
+
+        String topic = "zigbee2mqtt/" + device + "/set";
+        String payload = "{\"state\": \"" + state.toUpperCase() + "\"}";
+
+        try{
+            MqttMessage message = new MqttMessage(payload.getBytes());
+             mqttClient.publish(topic,message);
+            return "Sent command to " + device + " to turn " + state.toUpperCase();
+        }
+        catch (Exception e){
+            return "Error sending command: " + e.getMessage();
+        }
+    }
+
 }

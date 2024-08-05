@@ -22,6 +22,12 @@ public class UsersController {
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody Users users){
 
+        System.out.println(users.getFirstName());
+        System.out.println(users.getLastName());
+        System.out.println(users.getPassword());
+        System.out.println(users.getEmail());
+        System.out.println(users.getAge());
+
         if(usersService.emailValidator(users.getEmail())){
             usersService.addNewUser(users);
             return new ResponseEntity<>("User registers successfully", HttpStatus.OK);

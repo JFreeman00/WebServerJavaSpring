@@ -4,6 +4,7 @@ package com.example.WebServer.SmartHome.Entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 // Class that will store new users in the database
 
@@ -31,70 +32,101 @@ public class Users {
     private Long id; // Primary Key
     private String firstName;
     private String lastName;
+    private String password;
     private String email;
-    private LocalDate date;
+    private LocalDate dob;
+
+    @Transient
+    private Integer age;
 
 
-    public Users(Long id, String firstName, String lastName, String email, LocalDate date) {
+    public Users(Long id, String firstName, String lastName, String password, String email, LocalDate dob) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.password = password;
         this.email = email;
-        this.date = date;
+        this.dob = dob;
+    }
+
+    public Users(String firstName, String lastName, String password, String email, LocalDate dob) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.email = email;
+        this.dob = dob;
     }
 
     public Users() {
 
     }
 
+    //--------Getters----------
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public String getPassword(){
+        return password;
     }
 
     public String getEmail() {
         return email;
     }
 
+    public LocalDate getDob() {
+        return dob;
+    }
+
+    public Integer getAge() {
+        return Period.between(this.dob, LocalDate.now()).getYears(); // För att räkna ut åldern
+    }
+
+    //---------Setters------------
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    public void setPassword(String password){
+        this.password = password;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     @Override
     public String toString() {
-        return "User{" +
+        return "Users{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", date='" + date + '\'' +
+                ", age=" + age +
                 '}';
     }
 }
