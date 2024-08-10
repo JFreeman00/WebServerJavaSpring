@@ -5,6 +5,7 @@ import com.example.WebServer.SmartHome.Service.DeviceService;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,13 +47,12 @@ public class DeviceController {
         // Create the payload for the MQTT message
         String payload = "{\"state\": \"" + command.toUpperCase() + "\"}";
 
-        try {
-            // Här skickar vi meddeladet som en MQTT
+        if(mqttClient.isConnected()){
             mqttPublisher.publish(topic, payload);
             return ResponseEntity.ok("Command sent to " + device + " to turn " + command.toUpperCase());
         }
-        catch (Exception e){
-            return ResponseEntity.status(500).body("Error sending command: " + e.getMessage());
+        else {
+            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body("MQTT client not connected");
         }
 
 
