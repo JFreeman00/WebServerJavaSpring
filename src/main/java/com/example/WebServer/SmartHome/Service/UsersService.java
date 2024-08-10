@@ -1,7 +1,7 @@
 package com.example.WebServer.SmartHome.Service;
 
-import com.example.WebServer.SmartHome.Entity.Users;
-import com.example.WebServer.SmartHome.Repository.UsersRepository;
+//import com.example.WebServer.SmartHome.Entity.Users;
+//import com.example.WebServer.SmartHome.Repository.UsersRepository;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,10 +14,11 @@ import java.util.regex.Pattern;
  * Class that handles the logic for all Users
  */
 
+/*
 @Service
 public class UsersService {
 
-    private final UsersRepository usersRepository;
+    //private final UsersRepository usersRepository;
 
     // För att emailen ska vara i rätt foramt
     private static String EMAIl_CHARS = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
@@ -56,3 +57,5 @@ public class UsersService {
 
     }
 }
+
+ */

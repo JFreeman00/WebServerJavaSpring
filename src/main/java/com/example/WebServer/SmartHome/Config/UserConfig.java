@@ -1,7 +1,7 @@
 package com.example.WebServer.SmartHome.Config;
 
-import com.example.WebServer.SmartHome.Entity.Users;
-import com.example.WebServer.SmartHome.Repository.UsersRepository;
+//import com.example.WebServer.SmartHome.Entity.Users;
+//import com.example.WebServer.SmartHome.Repository.UsersRepository;
 import org.apache.catalina.User;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 
+/*
 @Configuration
 public class UserConfig {
 
@@ -42,3 +43,6 @@ public class UserConfig {
         };
     }
 }
+
+
+ */

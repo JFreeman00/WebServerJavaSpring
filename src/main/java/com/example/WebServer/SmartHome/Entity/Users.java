@@ -1,6 +1,6 @@
 package com.example.WebServer.SmartHome.Entity;
 
-
+/*
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -12,11 +12,11 @@ import java.time.Period;
 @Table
 public class Users {
 
-    /*
+
     CREATE SEQUENCE users_sequence
     START WITH 1
     INCREMENT BY 1;
-     */
+
     // To define a new Key for every user
     @Id
     @SequenceGenerator(
@@ -130,3 +130,6 @@ public class Users {
                 '}';
     }
 }
+
+ */
+

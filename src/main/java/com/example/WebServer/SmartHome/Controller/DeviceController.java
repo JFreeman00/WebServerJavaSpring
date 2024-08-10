@@ -23,6 +23,10 @@ public class DeviceController {
     @Autowired
     private MqttClient mqttClient;
 
+    @Autowired
+    private MqttPublisher mqttPublisher;
+
+
     // Vi sparar command, device och ip
     List<DeviceEntity> devices = new ArrayList<>(); // Lista för att samla all enheter i
 
@@ -32,8 +36,28 @@ public class DeviceController {
 
         System.out.println("Received command: " + deviceEntity.getCommand());
         System.out.println("For device: " + deviceEntity.getDevice());
+
+        String command = deviceEntity.getCommand();
+        String device = deviceEntity.getDevice();
+
+        // Define the topic based on the device // detta är vad vi ska subscriba på
+        String topic = "zigbee2mqtt/" + device + "/set";
+
+        // Create the payload for the MQTT message
+        String payload = "{\"state\": \"" + command.toUpperCase() + "\"}";
+
+        try {
+            // Här skickar vi meddeladet som en MQTT
+            mqttPublisher.publish(topic, payload);
+            return ResponseEntity.ok("Command sent to " + device + " to turn " + command.toUpperCase());
+        }
+        catch (Exception e){
+            return ResponseEntity.status(500).body("Error sending command: " + e.getMessage());
+        }
+
+
         // Vi måste spara våran device i databasen för att kunna skicka tillbaka den när användaren öppnar appen
-        return deviceService.sendMessageToDevice(deviceEntity);
+        //return deviceService.sendMessageToDevice(deviceEntity);
 
     }
 
@@ -43,6 +67,7 @@ public class DeviceController {
 
         System.out.println(deviceEntity.getDevice());
         System.out.println(deviceEntity.getIp());
+
         devices.add(deviceEntity);
         return ResponseEntity.ok("Device registered successfully");
     }
@@ -59,8 +84,9 @@ public class DeviceController {
         return List.of("No data found");
     }
 
-    @GetMapping("/{device}/{state}")
-    public String controlDevice(@PathVariable String device, @PathVariable String state){
+    //Flytta denna till MqttService senare
+    /*
+    public String controlDevice(@PathVariable String command, @PathVariable String device){
 
         String topic = "zigbee2mqtt/" + device + "/set";
         String payload = "{\"state\": \"" + state.toUpperCase() + "\"}";
@@ -74,5 +100,7 @@ public class DeviceController {
             return "Error sending command: " + e.getMessage();
         }
     }
+
+     */
 
 }

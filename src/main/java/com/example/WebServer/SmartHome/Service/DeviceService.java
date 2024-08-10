@@ -64,22 +64,12 @@ public class DeviceService {
             deviceCommand.setCommand("on");
             return new ResponseEntity<>("Command is valid", HttpStatus.OK);
 
-            //String response = String.format("Command sent to ESP: %s", deviceCommand.getCommand());
-            //StatusResponse validResponse = new StatusResponse("success", response);
-            //return ResponseEntity.ok().body(validResponse);
-
-        } else if ("off".equals(deviceCommand.getCommand())) {
+        }
+        else if ("off".equals(deviceCommand.getCommand())) {
             deviceCommand.setCommand("off");
             return new ResponseEntity<>("Command is valid", HttpStatus.OK);
-
-            //String response = String.format("Command sent to ESP: %s", deviceCommand.getCommand());
-            //StatusResponse validResponse = new StatusResponse("success", response);
-            //return ResponseEntity.ok().body(validResponse);
         }
-
         else{
-            //StatusResponse errorResponse = new StatusResponse("error", "Failed to send command to device");
-            //return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
             return new ResponseEntity<>(new StatusResponse("error", "Failed to send command to device"), HttpStatus.BAD_REQUEST);
         }
     }
