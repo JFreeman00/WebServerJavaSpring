@@ -31,7 +31,7 @@ public class MqttConfig {
         return client;
     }
 
-    @Bean
+    @Bean(name = "mqttMessageListener")
     public MqttMessageListener mqttMessageListener (MqttClient mqttClient){
         MqttMessageListener listener = new MqttMessageListener();
         mqttClient.setCallback(listener);
