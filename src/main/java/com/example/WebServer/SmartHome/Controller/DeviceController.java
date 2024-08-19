@@ -42,7 +42,7 @@ public class DeviceController {
         String device = deviceEntity.getDevice();
 
         // Define the topic based on the device // detta är vad vi ska subscriba på
-        String topic = "zigbee2mqtt/" + device + "/set";
+        String topic = "device/First";
 
         // Create the payload for the MQTT message
         String payload = "{\"state\": \"" + command.toUpperCase() + "\"}";
