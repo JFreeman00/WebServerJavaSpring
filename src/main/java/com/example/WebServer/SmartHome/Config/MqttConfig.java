@@ -1,9 +1,7 @@
 package com.example.WebServer.SmartHome.Config;
 
 import com.example.WebServer.SmartHome.Controller.MqttMessageListener;
-import org.eclipse.paho.client.mqttv3.MqttClient;
-import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
-import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -37,7 +35,25 @@ public class MqttConfig {
         mqttClient.setCallback(listener);
 
         try {
-            mqttClient.subscribe("device/light");
+            //mqttClient.subscribe("device/light");
+
+            mqttClient.subscribe("zigbee2mqtt/device_1", new IMqttMessageListener() {
+                @Override
+                public void messageArrived(String topic, MqttMessage message) throws Exception {
+                    System.out.println("Message from device_1: " + new String(message.getPayload()));
+                    // Handle the message from device_1
+                }
+            });
+            /*
+            mqttClient.subscribe("zigbee2mqtt/device_2", new IMqttMessageListener() {
+                @Override
+                public void messageArrived(String topic, MqttMessage message) throws Exception {
+                    System.out.println("Message from device_2: " + new String(message.getPayload()));
+                    // Handle the message from device_2
+                }
+            });
+
+             */
         }
         catch (MqttException e){
             e.printStackTrace();
