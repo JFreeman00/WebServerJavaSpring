@@ -42,22 +42,26 @@ public class DeviceController {
         String device = deviceEntity.getDevice();
 
         // Define the topic based on the device // detta är vad vi ska subscriba på
-        String topic = "device/First";
+        //String topic = "zigbee2mqtt/" + device + "/set";
 
         // Create the payload for the MQTT message
-        String payload = "{\"state\": \"" + command.toUpperCase() + "\"}";
+        //String payload = "{\"state\": \"" + command.toUpperCase() + "\"}";
 
+        /*
         if(mqttClient.isConnected()){
             mqttPublisher.publish(topic, payload);
+            deviceService.sendMessageToDevice(deviceEntity);
             return ResponseEntity.ok("Command sent to " + device + " to turn " + command.toUpperCase());
         }
         else {
             return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body("MQTT client not connected");
         }
 
+         */
+
 
         // Vi måste spara våran device i databasen för att kunna skicka tillbaka den när användaren öppnar appen
-        //return deviceService.sendMessageToDevice(deviceEntity);
+        return deviceService.sendMessageToDevice(deviceEntity);
 
     }
 
