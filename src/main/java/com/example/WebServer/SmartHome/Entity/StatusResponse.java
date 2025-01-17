@@ -1,5 +1,11 @@
 package com.example.WebServer.SmartHome.Entity;
 
+/**
+ * Class for Http responses.
+ *
+ * @author Jakob Friman Blomdahl
+ */
+
 public class StatusResponse {
 
     private String status;

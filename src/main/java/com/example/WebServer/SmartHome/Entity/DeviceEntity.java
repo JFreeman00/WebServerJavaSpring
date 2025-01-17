@@ -5,15 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class that has the Structure of the JSON
- * Class can take a command and what device
+ * Entity class for the device. Here we set the command, what device, the ip and data for the current device.
+ * Used to store the command, device and the ip for the device.
+ *
+ * @author Jakob Friman Blomdahl
  */
 public class DeviceEntity {
 
     private String command;
     private String device;
     private String ip;
-
     private LocalDate date;
 
     public DeviceEntity() {

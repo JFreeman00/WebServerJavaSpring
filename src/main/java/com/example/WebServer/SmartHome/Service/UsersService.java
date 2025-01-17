@@ -2,7 +2,6 @@ package com.example.WebServer.SmartHome.Service;
 
 import com.example.WebServer.SmartHome.Entity.Users;
 import com.example.WebServer.SmartHome.Repository.UsersRepository;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +10,9 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 
 /**
- * Class that handles the logic for all Users
+ * Service class that handles the logic for all Users.
+ *
+ * @author Jakob Friman Blomdah
  */
 
 

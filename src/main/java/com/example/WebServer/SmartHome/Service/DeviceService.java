@@ -8,6 +8,13 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.JsonObject;
 
+/**
+ * Service class for the device. We receive information from {@link com.example.WebServer.SmartHome.Controller.DeviceController}
+ * and then we send the information to the microcontroller
+ *
+ * @author Jakob Friman Blomdah
+ */
+
 @Service
 public class DeviceService {
 
@@ -55,7 +62,6 @@ public class DeviceService {
 
     public ResponseEntity<Object> checkDeviceCommand(DeviceEntity deviceCommand) {
 
-        // Kommer nog aldrig att vara denna
         if(deviceCommand.getCommand() == null || deviceCommand.getCommand().isEmpty()) {
             return new ResponseEntity<>("Command is missing", HttpStatus.BAD_REQUEST);
         }

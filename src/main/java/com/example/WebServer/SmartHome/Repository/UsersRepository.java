@@ -9,7 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 /**
- * Data access layer
+ * Repository for the database. Data access layer
+ * Used for database
+ * @author Jakob Friman Blomdah
  */
 
 @Repository

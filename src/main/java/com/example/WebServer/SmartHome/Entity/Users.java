@@ -1,13 +1,13 @@
 package com.example.WebServer.SmartHome.Entity;
 
-
-//import jakarta.persistence.*;
-
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.Period;
 
-// Class that will store new users in the database
+/**
+ * Class that store the user in the database with the values.
+ *
+ * @author Jakob Friman Blomdahl
+ */
 
 @Entity(name = "users")
 @Table

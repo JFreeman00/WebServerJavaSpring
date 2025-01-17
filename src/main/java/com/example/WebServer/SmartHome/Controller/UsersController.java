@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * Controller class for Users
+ * Controller class for Users. Here we receive the http request and then sends that information over to
+ * the entity classes.
+ *
+ * @author Jakob Friman Blomdahl
  */
 
 @RestController
