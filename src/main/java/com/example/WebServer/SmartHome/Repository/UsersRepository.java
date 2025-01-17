@@ -1,9 +1,9 @@
 
 package com.example.WebServer.SmartHome.Repository;
 
-//import com.example.WebServer.SmartHome.Entity.Users;
-//import org.springframework.data.jpa.repository.JpaRepository;
-//import org.springframework.data.jpa.repository.Query;
+import com.example.WebServer.SmartHome.Entity.Users;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -11,7 +11,7 @@ import java.util.Optional;
 /**
  * Data access layer
  */
-/*
+
 @Repository
 public interface UsersRepository extends JpaRepository<Users, Long> {
 
@@ -21,5 +21,4 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
 
 }
 
- */
 

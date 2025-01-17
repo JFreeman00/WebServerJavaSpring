@@ -1,8 +1,9 @@
 package com.example.WebServer.SmartHome.Entity;
 
-/*
-import jakarta.persistence.*;
 
+//import jakarta.persistence.*;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -13,9 +14,9 @@ import java.time.Period;
 public class Users {
 
 
-    CREATE SEQUENCE users_sequence
-    START WITH 1
-    INCREMENT BY 1;
+    //CREATE SEQUENCE users_sequence
+    //START WITH 1
+    //INCREMENT BY 1;
 
     // To define a new Key for every user
     @Id
@@ -31,30 +32,20 @@ public class Users {
     )
     private Long id; // Primary Key
     private String firstName;
-    private String lastName;
     private String password;
     private String email;
-    private LocalDate dob;
 
-    @Transient
-    private Integer age;
-
-
-    public Users(Long id, String firstName, String lastName, String password, String email, LocalDate dob) {
+    public Users(Long id, String firstName, String password, String email) {
         this.id = id;
         this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
         this.email = email;
-        this.dob = dob;
+
     }
 
     public Users(String firstName, String lastName, String password, String email, LocalDate dob) {
         this.firstName = firstName;
-        this.lastName = lastName;
         this.password = password;
         this.email = email;
-        this.dob = dob;
     }
 
     public Users() {
@@ -70,24 +61,12 @@ public class Users {
         return firstName;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
     public String getPassword(){
         return password;
     }
 
     public String getEmail() {
         return email;
-    }
-
-    public LocalDate getDob() {
-        return dob;
-    }
-
-    public Integer getAge() {
-        return Period.between(this.dob, LocalDate.now()).getYears(); // För att räkna ut åldern
     }
 
     //---------Setters------------
@@ -99,9 +78,6 @@ public class Users {
         this.firstName = firstName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
     public void setPassword(String password){
         this.password = password;
     }
@@ -110,26 +86,16 @@ public class Users {
         this.email = email;
     }
 
-    public void setDob(LocalDate dob) {
-        this.dob = dob;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
     @Override
     public String toString() {
         return "Users{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", age=" + age +
                 '}';
     }
 }
 
- */
+
 
