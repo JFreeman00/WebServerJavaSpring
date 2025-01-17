@@ -1,4 +1,4 @@
-Java 11.
+Java 17.
 Spring v 2.7.0
 Apache Maven 3.8.6
 
